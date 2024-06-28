@@ -1,20 +1,65 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { login } from '../services/authService';
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
-    const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleGetStarted = () => {
+  const handleRegister = async () => {
       navigate('/register');
-    };
+  };
+
+  const handleLogin = () => {
+      const userDetails = {
+          email: email,
+          password: password,
+      };
+      console.log(userDetails);
+      axios.post("http://localhost:5000/api/users/login", userDetails)
+          .then((response) => {
+              console.log(response);
+              if (response.data.token) {
+                  toast.success('User logged in successfully!', {
+                      position: "top-right",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "light",
+                  });
+                  setTimeout(() => {
+                      navigate('/home');
+                  }, 5000);
+              }
+          })
+          .catch((error) => {
+              console.log(error);
+              toast.error('Error logging in user!', {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+              });
+          });
+  };
+
 
   return (
     <div className="flex items-center relative justify-center min-h-screen bg-gray-100">
-      {/* <div className="relative p-50  bg-gray-100 shadow-lg rounded-lg flex flex-col items-center"> */}
       <div className=" -top-32 -left-32 -right-32 w-50 h-full hidden md:block bg-red-200 rounded-full absolute transform rotate-45"></div>
-  
         <div className="flex absolute flex-col items-center bg-gray-200 p-10 z-10 rounded-md md:w-1/3">
           <h2 className="text-5xl font-bold mb-8">The Oracle.</h2>
           <div className="w-100 mb-6">
@@ -23,8 +68,10 @@ const Login = () => {
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="Email"
-              type="text"
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="username@theoracle"
             />
           </div>
@@ -36,7 +83,9 @@ const Login = () => {
     <input
       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
       id="password"
+      value={password}
       type={showPassword ? "text" : "password"}
+      onChange={(e) => setPassword(e.target.value)}
       placeholder="******************"
     />
     <button
@@ -89,6 +138,7 @@ const Login = () => {
             <button
               className="bg-red-900 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
+              onClick={handleLogin}
             >
               Sign In
             </button>
@@ -96,17 +146,29 @@ const Login = () => {
              <button
       className="bg-red-900 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
       type="button"
-      onClick={handleGetStarted}
+      onClick={handleRegister}
     >
       Get started
     </button>
           </div>
         </div>
             <div className="absolute bottom-0 right-200 hidden md:block w-50 h-50">
-            <img src="src/assets/image.png" alt="" className=" h-full md:left-[600px] -top-14 relative  object-cover" />
+            <img src="src/assets/image.png" alt="" className=" h-full md:left-[600px] -top-16 relative  object-cover" />
             </div>
+
+            <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       </div>
-    // </div>
   );
 };
 

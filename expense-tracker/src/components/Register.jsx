@@ -1,21 +1,66 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { register } from '../services/authService';
+import axios from 'axios'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState(''); 
+    const [password, setPassword] = useState('');
 
     
     const navigate = useNavigate();
 
-    const handleGetStarted = () => {
-      navigate('/up');
+    const register = () => {
+      const userDetails = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+      }
+      console.log(userDetails)
+      axios.post("http://localhost:5000/api/users/register", userDetails)
+      .then((response) => {
+    console.log(response);
+    if (response.data.msg === 'User registered successfully') {
+      toast.success('User registered successfully!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        navigate('/login');
+      }, 5000);
+    }
+  })
+  .catch((error) => {
+    console.log(error);
+    toast.error('Error registering user!', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  });
     };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white">
-      {/* <div className="relative p-50  bg-gray-100 shadow-lg rounded-lg flex flex-col items-center"> */}
-        <div className="absolute top-0 left-0 w-0 h-40 bg-red-200 rounded-full -z-10"></div>    
-        <div className="flex flex-col items-center bg-gray-200 p-10 rounded-md md:w-1/3">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className=" -top-32 -left-32 -right-32 w-50 h-full hidden md:block bg-red-200 rounded-full absolute transform rotate-45"></div>
+      <div className="flex absolute flex-col items-center bg-gray-200 p-10 z-10 rounded-md md:w-1/3">
           <h2 className="text-5xl font-bold mb-8">The Oracle.</h2>
           <div className="w-100 mb-6">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
@@ -26,6 +71,8 @@ const Register = () => {
               id="firstName"
               type="text"
               placeholder="Victor..."
+              onChange={(e) => setFirstName(e.target.value)}
+              value={firstName}
             />
           </div>
           <div className="w-100 mb-6">
@@ -37,6 +84,8 @@ const Register = () => {
               id="lastName"
               type="text"
               placeholder="Oluwapelumi..."
+              onChange={(e) => setLastName(e.target.value)}
+              value={lastName}
             />
           </div>
           <div className="w-100 mb-6">
@@ -45,9 +94,11 @@ const Register = () => {
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="Email"
+              id="email"
               type="text"
               placeholder="username@theoracle"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
             />
           </div>
           <div className="w-100 mb-8">
@@ -60,6 +111,8 @@ const Register = () => {
       id="password"
       type={showPassword ? "text" : "password"}
       placeholder="*******************"
+      onChange={(e) => setPassword(e.target.value)}
+      value={password}
     />
     <button
       type="button"
@@ -111,14 +164,29 @@ const Register = () => {
           <button
       className="bg-red-900 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
       type="button"
-      onClick={handleGetStarted}
+      onClick={register}
     >
       Sign Up
     </button>
           </div>
         </div>
-      </div>
-    // </div>
+        <div className="absolute bottom-0 right-200 hidden md:block w-50 h-50">
+            <img src="src/assets/image.png" alt="" className=" h-full md:left-[600px] -top-7 relative  object-cover" />
+            </div>
+
+            <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+    </div>
   );
 };
 
