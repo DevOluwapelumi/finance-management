@@ -3,11 +3,11 @@
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Login from './components/Login';
+import Login from './pages/Login';
 import './index.css';
 import './App.css'
-import Register from './components/Register';
-import Home from './components/Home';
+import Register from './pages/Register';
+import Home from './pages/Home';
 
 const App = () => {
   return (
