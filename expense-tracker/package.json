@@ -29,7 +29,11 @@
     "vite": "^5.3.1"
   },
   "dependencies": {
+    "@headlessui/react": "^2.1.1",
+    "chart.js": "^4.4.3",
+    "flowbite-react": "^0.10.1",
     "formik": "^2.4.6",
+    "react-chartjs-2": "^5.2.0",
     "react-router-dom": "^6.24.0",
     "react-toastify": "^10.0.5",
     "yup": "^1.4.0"
