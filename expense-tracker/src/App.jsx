@@ -8,6 +8,8 @@ import './index.css';
 import './App.css'
 import Register from './pages/Register';
 import Home from './pages/Home';
+import ExpensesTracking from './pages/ExpensesTracking';
+import BudgetAndGoals from './pages/BudgetAndGoals';
 
 const App = () => {
   return (
@@ -31,6 +33,8 @@ const App = () => {
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/home' element={<Home/>}/>
+        <Route path='/expense' element={<ExpensesTracking/>}/>
+        <Route path='/budget' element={<BudgetAndGoals/>}/>
       </Routes>
     </div>
   );

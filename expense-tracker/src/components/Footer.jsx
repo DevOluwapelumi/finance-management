@@ -2,13 +2,21 @@
 
 const Footer = () => {
   return (
-    <footer className="bg-red-900 text-white p-4 text-center mt-4">
-      <div className="container mx-auto">
+    <footer className="bg-red-900 text-white p-4 text-center mt-1">
+      <div className="container w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
         <p>&copy; 2024 Personal Finance Manager. All rights reserved.</p>
         <div className="space-x-4">
-          <a href="#" className="hover:text-gray-300">Privacy Policy</a>
-          <a href="#" className="hover:text-gray-300">Terms of Service</a>
-          <a href="#" className="hover:text-gray-300">Contact Us</a>
+        <ul className="flex flex-wrap items-center text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+          <li>
+          <a href="#" className="hover:text-gray-300 me-4 md:me-6">Privacy Policy</a>
+          </li>
+          <li>
+          <a href="#" className="hover:text-gray-300 me-4 md:me-6">Terms of Service</a>
+          </li>
+          <li>
+          <a href="#" className="hover:text-gray-300 me-4 md:me-6">Contact Us</a>
+          </li>
+          </ul>
         </div>
       </div>
     </footer>
@@ -16,3 +24,5 @@ const Footer = () => {
 };
 
 export default Footer;
+
+
