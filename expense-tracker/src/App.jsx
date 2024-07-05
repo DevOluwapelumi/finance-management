@@ -10,6 +10,7 @@ import Register from './pages/Register';
 import Home from './pages/Home';
 import ExpensesTracking from './pages/ExpensesTracking';
 import BudgetAndGoals from './pages/BudgetAndGoals';
+import Dashboard from './pages/Dashboard';
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
         <Route path='/home' element={<Home/>}/>
         <Route path='/expense' element={<ExpensesTracking/>}/>
         <Route path='/budget' element={<BudgetAndGoals/>}/>
+        <Route path='/dashboard' element={<Dashboard/>}/>
       </Routes>
     </div>
   );
