@@ -11,6 +11,7 @@ import Home from './pages/Home';
 import ExpensesTracking from './pages/ExpensesTracking';
 import BudgetAndGoals from './pages/BudgetAndGoals';
 import Dashboard from './pages/Dashboard';
+import LandingPage from './pages/LandingPage';
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
       />
 
       <Routes>
+        <Route path='/' element={<LandingPage/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/home' element={<Home/>}/>
