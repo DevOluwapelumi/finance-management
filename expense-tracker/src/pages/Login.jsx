@@ -165,7 +165,7 @@ const Login = () => {
         </form>
       </div>
       <div className="absolute bottom-0 right-200 hidden md:block w-50 h-50">
-        <img src="src/assets/image.png" alt="" className="h-full md:left-[600px] -top-16 relative object-cover" />
+        <img src="/src/assets/image.png" alt="" className="h-full md:left-[600px] -top-16 relative object-cover" />
       </div>
 
       <ToastContainer
