@@ -11,6 +11,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 // import { Link } from 'react-router-dom';
+import image4 from '../assets/Image.png'; 
 
 const Dashboard = () => {
 
@@ -32,7 +33,7 @@ const Dashboard = () => {
       <h2 className="text-lg font-bold mb-2">New update!</h2>
       <div>
         <div className="flex items-start space-x-2">
-          <img src="src/assets/Image.png" alt="Insights" className="w-10 h-10 rounded-full"/>
+          <img src={image4} alt="Insights" className="w-10 h-10 rounded-full"/>
           <div className="flex-1">
             <p className="font-semibold">Insights</p>
             <p className="text-sm text-gray-600">analyzed data for Expense Trends</p>
@@ -45,7 +46,7 @@ const Dashboard = () => {
           <p className="text-sm text-gray-600">Now</p>
         </div>
         <div className="flex items-start space-x-2">
-          <img src="src/assets/Image.png" alt="Calculator" className="w-10 h-10 rounded-full"/>
+          <img src={image4} alt="Calculator" className="w-10 h-10 rounded-full"/>
           <div className="flex-1">
             <p className="font-semibold">Calculator</p>
             <p className="text-sm text-gray-600">Expense Trends</p>
@@ -58,7 +59,7 @@ const Dashboard = () => {
           <p className="text-sm text-gray-600">Today</p>
         </div>
         <div className="flex items-start space-x-2">
-          <img src="src/assets/Image.png" alt="Report" className="w-10 h-10 rounded-full"/>
+          <img src={image4} alt="Report" className="w-10 h-10 rounded-full"/>
           <div className="flex-1">
             <p className="font-semibold">Report</p>
             <p className="text-sm text-gray-600">Financial Report</p>
@@ -183,7 +184,7 @@ const Dashboard = () => {
       <div className="space-y-4">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-start space-x-2">
-            <img src="src/assets/Image.png" alt="Insights" className="w-10 h-10 rounded-full"/>
+            <img src={image4} alt="Insights" className="w-10 h-10 rounded-full"/>
             <p className="font-semibold">John Smith</p>
           </div>
           <div className="flex space-x-2">
@@ -193,7 +194,7 @@ const Dashboard = () => {
         </div>
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-start space-x-2">
-            <img src="src/assets/Image.png" alt="Insights" className="w-10 h-10 rounded-full"/>
+            <img src={image4} alt="Insights" className="w-10 h-10 rounded-full"/>
             <p className="font-semibold">Sarah</p>
           </div>
           <div className="flex space-x-2">
@@ -203,7 +204,7 @@ const Dashboard = () => {
         </div>
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-start space-x-2">
-            <img src="src/assets/Image.png" alt="Insights" className="w-10 h-10 rounded-full"/>
+            <img src={image4} alt="Insights" className="w-10 h-10 rounded-full"/>
             <p className="font-semibold">Michael Brown</p>
           </div>
           <div className="flex space-x-2">

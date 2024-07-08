@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import image2 from '../assets/Image.png'; 
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -165,7 +166,7 @@ const Login = () => {
         </form>
       </div>
       <div className="absolute bottom-0 right-200 hidden md:block w-50 h-50">
-        <img src="src/assets/Image.png" alt="" className="h-full md:left-[600px] -top-16 relative object-cover" />
+        <img src={image2} alt="" className="h-full md:left-[600px] -top-16 relative object-cover" />
       </div>
 
       <ToastContainer
