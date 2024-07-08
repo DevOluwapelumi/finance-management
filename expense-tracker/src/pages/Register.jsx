@@ -141,7 +141,7 @@ const Register = () => {
                 </form>
             </div>
             <div className="absolute bottom-0 right-200 hidden md:block w-50 h-50">
-                <img src="/src/assets/images/image.png" alt="" className="h-full md:left-[600px] -top-7 relative object-cover" />
+                <img src="src/assets/Image.png" alt="" className="h-full md:left-[600px] -top-7 relative object-cover" />
             </div>
 
             <ToastContainer

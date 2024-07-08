@@ -40,7 +40,7 @@ const LandingPage = () => {
 
 <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center">
       <header className="bg-white w-full py-6 shadow-md text-center">
-        <img src="/src/assets/images/expenses.png" alt="Expense Tracker" className="mx-auto mb-4" />
+        <img src="src/assets/expenses.png" alt="Expense Tracker" className="mx-auto mb-4" />
         <h1 className="text-3xl font-bold">Take Control of Your Finances with Our Simple Expense Tracker</h1>
         <p className="text-gray-700 mt-2">Get a clear picture of your spending habits and achieve your financial goals</p>
       </header>
