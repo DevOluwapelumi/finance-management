@@ -26,7 +26,7 @@ const Login = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      axios.post("http://localhost:5000/api/users/login", values)
+      axios.post("https://tracker-server-two.vercel.app/api/users/login", values)
         .then((response) => {
           console.log(response);
           if (response.data.token) {
