@@ -1,16 +1,17 @@
 // import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Sidebar from '../components/Sidebar';
+// import Sidebar from '../components/Sidebar';
 
 const BudgetAndGoals = () => {
   return (
     <div className="flex flex-col min-h-screen">
     <Header />
-    <div className="flex flex-grow">
-      <Sidebar className="hidden md:block md:w-1/4 lg:w-1/5" />
 
-    <main className="flex-grow p-2 md:ml-60 mt-5">
+    {/* <div className="flex flex-grow">
+      <Sidebar className="hidden md:block md:w-1/4 lg:w-1/5" /> */}
+
+    <main className="flex-grow p-2 md:ml-60 mt-10">
       <div className="container mx-auto py-6 px-4 md:px-0 flex-1">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-white p-6 rounded-lg shadow-md">
@@ -48,7 +49,7 @@ const BudgetAndGoals = () => {
       <Footer className="mt-auto"/>
     </main>
     </div>
-    </div>
+    // </div>
   );
 };
 

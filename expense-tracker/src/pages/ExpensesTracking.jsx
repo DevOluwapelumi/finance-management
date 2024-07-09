@@ -1,9 +1,11 @@
 // import React from 'react';
-import Header from '../components/Header';
+// import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Sidebar from '../components/Sidebar';
+// import Sidebar from '../components/Sidebar';
 import { Pie } from 'react-chartjs-2';
 import 'chart.js/auto';
+import Header from '../components/Header';
+// import Nav from '../components/Nav';
 
 const ExpensesTracking = () => {
   const expenses = [
@@ -26,11 +28,12 @@ const ExpensesTracking = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <div className="flex flex-grow">
-        <Sidebar className="hidden md:block md:w-1/4 lg:w-1/5" />
+
+      {/* <div className="flex flex-grow">
+        <Nav className="hidden md:block md:w-1/4 lg:w-1/5" /> */}
 
 
-        <main className="flex-grow p-2 md:ml-60 mt-5">
+        <main className="flex-grow p-2 md:ml-60 mt-10">
           <div className="container mx-auto py-6 px-4 md:px-6">
             <div className="bg-white p-4 rounded-lg shadow-md mb-6">
               <h2 className="text-lg font-bold mb-4">Add New Expense</h2>
@@ -80,7 +83,7 @@ const ExpensesTracking = () => {
           <Footer />
         </main>
       </div>
-    </div>
+    // </div>
   );
 };
 

@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from './pages/Login';
+import 'tailwindcss/tailwind.css';
 import './index.css';
 import './App.css'
 import Register from './pages/Register';

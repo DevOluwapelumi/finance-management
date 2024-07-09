@@ -14,7 +14,8 @@ import {
 import 'flowbite';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Sidebar from '../components/Sidebar';
+// import Sidebar from '../components/Sidebar';
+// import Nav from '../components/Nav';
 
 ChartJS.register(
   ArcElement,
@@ -29,11 +30,13 @@ ChartJS.register(
 
 const Home = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <>
       <Header />
+    {/* <Nav/> */}
+    <div className="flex flex-col mt-[35px] min-h-screen">
 
-      <div className="flex flex-grow">
-        <Sidebar className="hidden md:block md:w-1/4 lg:w-1/5" />
+      {/* <div className="flex flex-grow"> */}
+        {/* <Sidebar className="hidden md:block md:w-1/4 lg:w-1/5" /> */}
 
         <main className="flex-grow p-2 md:ml-60 mt-5">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
@@ -119,7 +122,8 @@ const Home = () => {
           <Footer />
         </main>
       </div>
-    </div>
+    {/* </div> */}
+    </>
   );
 };
 
