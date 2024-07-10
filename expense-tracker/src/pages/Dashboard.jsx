@@ -24,8 +24,8 @@ const Dashboard = () => {
       {/* <Sidebar/> */}
 
 
-<div className="p-4 sm:ml-64 mt-12">
-        <div className="p- border-2 border-red-700 border-dashed rounded-lg dark:border-gray-700 shadow-md ">
+<div className="p-2 sm:ml-64 mt-[80px]">
+        {/* <div className="p- border-2 border-red-700 border-dashed rounded-lg dark:border-gray-700 shadow-md "> */}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap- mb-4">
   <div className="flex space-x-4 p-2">
@@ -279,7 +279,7 @@ const Dashboard = () => {
     </div>
   </div>
 </div>
-    </div>
+    {/* </div> */}
     <Footer/>           
     </div>
 </>

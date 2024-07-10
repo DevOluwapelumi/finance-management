@@ -5,7 +5,7 @@ import image3 from '../assets/expenses.png';
 const LandingPage = () => {
   return (
     <>
-      <nav className="bg-red-900 p-4">
+      <nav className="bg-red-900 p-2">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-2 text-white text-2xl">
             <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />

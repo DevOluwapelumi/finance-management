@@ -38,7 +38,7 @@ const Home = () => {
       {/* <div className="flex flex-grow"> */}
         {/* <Sidebar className="hidden md:block md:w-1/4 lg:w-1/5" /> */}
 
-        <main className="flex-grow p-2 md:ml-60 mt-5">
+        <main className="flex-grow p-2 md:ml-60">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
             <div className="bg-white p-4 rounded-lg shadow-md mt-5">
               <h2 className="text-lg font-bold">Account Balance</h2>

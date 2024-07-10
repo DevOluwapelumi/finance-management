@@ -30,7 +30,8 @@ const Register = () => {
         },
         validationSchema,
         onSubmit: (values) => {
-            axios.post("https://tracker-server-two.vercel.app/api/users/register", values)
+            // axios.post("https://tracker-server-two.vercel.app/api/users/register", values)
+            axios.post("http://localhost:5000/api/users/register", values)
                 .then((response) => {
                     console.log(response);
                     if (response.data.msg === 'User registered successfully') {
@@ -67,7 +68,7 @@ const Register = () => {
 
     return (
         <>
-        <nav className="bg-red-900 p-4">
+        <nav className="bg-red-900 p-2">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex flex-wrap justify-between text-white text-2xl">
         <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
