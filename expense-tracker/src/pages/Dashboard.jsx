@@ -13,6 +13,8 @@ import Header from '../components/Header';
 // import { Link } from 'react-router-dom';
 // import image4 from '../assets/Image.png'; 
 
+
+
 const Dashboard = () => {
 
     
@@ -20,12 +22,14 @@ const Dashboard = () => {
   return (
     <>
     
-    <Header/>
-      {/* <Sidebar/> */}
+    <div className="flex flex-col min-h-screen">
+      <Header />
 
 
-<div className="p-2 sm:ml-64 mt-[80px]">
-        {/* <div className="p- border-2 border-red-700 border-dashed rounded-lg dark:border-gray-700 shadow-md "> */}
+
+
+<div className="p-4 sm:ml-64 mt-12">
+        <div className="p- border-2 border-red-700 border-dashed rounded-lg dark:border-gray-700 shadow-md ">
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap- mb-4">
   <div className="flex space-x-4 p-2">
@@ -279,8 +283,9 @@ const Dashboard = () => {
     </div>
   </div>
 </div>
-    {/* </div> */}
+    </div>
     <Footer/>           
+    </div>
     </div>
 </>
 

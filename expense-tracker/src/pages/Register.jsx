@@ -1,4 +1,3 @@
-// import { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
@@ -30,8 +29,8 @@ const Register = () => {
         },
         validationSchema,
         onSubmit: (values) => {
-            // axios.post("https://tracker-server-two.vercel.app/api/users/register", values)
-            axios.post("http://localhost:5000/api/users/register", values)
+            axios.post("https://tracker-server-two.vercel.app/api/users/register", values)
+            // axios.post("http://localhost:5000/api/users/register", values)
                 .then((response) => {
                     console.log(response);
                     if (response.data.msg === 'User registered successfully') {
@@ -69,18 +68,18 @@ const Register = () => {
     return (
         <>
         <nav className="bg-red-900 p-2">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="flex flex-wrap justify-between text-white text-2xl">
-        <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
-        <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">The Oracle.</span>
-        </div>
-        <div className="space-x-4">
-          <Link to="/" className="text-gray-300 hover:text-white">Home</Link>
-          <Link to="/login" className="text-gray-300 hover:text-white">Login</Link>
-          <Link to="/register" className="text-gray-300 hover:text-white">Register</Link>
-        </div>
-      </div>
-    </nav>
+            <div className="container mx-auto flex justify-between items-center">
+                <div className="flex flex-wrap justify-between text-white text-2xl">
+                    <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
+                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">The Oracle.</span>
+                </div>
+                <div className="space-x-4">
+                    <Link to="/" className="text-gray-300 hover:text-white">Home</Link>
+                    <Link to="/login" className="text-gray-300 hover:text-white">Login</Link>
+                    <Link to="/register" className="text-gray-300 hover:text-white">Register</Link>
+                </div>
+            </div>
+        </nav>
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="-top-32 -left-32 -right-32 w-50 h-full hidden md:block bg-red-200 rounded-full absolute transform rotate-45"></div>
             <div className="flex absolute flex-col items-center bg-gray-200 p-10 z-10 rounded-md md:w-1/3">
@@ -94,7 +93,7 @@ const Register = () => {
                             className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${formik.touched.firstName && formik.errors.firstName ? 'border-red-500' : ''}`}
                             id="firstName"
                             type="text"
-                            placeholder="Victor..."
+                            placeholder="Ayomide..."
                             {...formik.getFieldProps('firstName')}
                         />
                         {formik.touched.firstName && formik.errors.firstName ? (
@@ -109,7 +108,7 @@ const Register = () => {
                             className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${formik.touched.lastName && formik.errors.lastName ? 'border-red-500' : ''}`}
                             id="lastName"
                             type="text"
-                            placeholder="Oluwapelumi..."
+                            placeholder="Animashaun..."
                             {...formik.getFieldProps('lastName')}
                         />
                         {formik.touched.lastName && formik.errors.lastName ? (

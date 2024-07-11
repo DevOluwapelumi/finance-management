@@ -16,7 +16,8 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 // import Sidebar from '../components/Sidebar';
 // import Nav from '../components/Nav';
-
+import axios from 'axios';
+import { useEffect } from 'react';
 ChartJS.register(
   ArcElement,
   Tooltip,
@@ -29,6 +30,16 @@ ChartJS.register(
 );
 
 const Home = () => {
+
+  const currentUser = localStorage.userId
+  const getUserInfo=async()=>{
+    const response = await axios.post('http://localhost:5000/api/users/userDetails', {currentUser:currentUser});
+    console.log(response.data)
+    // http://localhost:5173/home
+  }
+  useEffect(()=>{
+    getUserInfo()
+  },[])
   return (
     <>
       <Header />
@@ -42,15 +53,15 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
             <div className="bg-white p-4 rounded-lg shadow-md mt-5">
               <h2 className="text-lg font-bold">Account Balance</h2>
-              <p className="text-2xl">$12,345.67</p>
+              <p className="text-2xl">$0.00</p>
             </div>
             <div className="bg-white p-4 rounded-lg shadow-md mt-5">
               <h2 className="text-lg font-bold">Monthly Spending</h2>
-              <p className="text-2xl">$2,456.78</p>
+              <p className="text-2xl">$0.00</p>
             </div>
             <div className="bg-white p-4 rounded-lg shadow-md mt-5">
               <h2 className="text-lg font-bold">Saving Goals</h2>
-              <p className="text-2xl">$8,900.00</p>
+              <p className="text-2xl">$0.00</p>
             </div>
           </div>
           <div className="bg-white p-4 rounded-lg shadow-md mb-4">

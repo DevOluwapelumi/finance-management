@@ -3,21 +3,41 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Pie } from 'react-chartjs-2';
 import 'chart.js/auto';
-import { fetchExpenses, addExpense, deleteExpense } from '../utils/api';
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
 
 const ExpensesTracking = () => {
   const [expenses, setExpenses] = useState([]);
   const [newExpense, setNewExpense] = useState({ date: '', category: '', amount: '' });
-  const token = 'your_jwt_token'; // Replace with the actual token
+  const currentUser = localStorage.userId;
+
+  const getUserInfo = async () => {
+    try {
+      const response = await axios.post('https://tracker-server-two.vercel.app/api/users/userDetails', { currentUser });
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error fetching user info:', error);
+    }
+  };
+
+  const [userExpenses, setUserExpenses] = useState([]);
+  const fetchExpenses = async () => {
+    if (currentUser) {
+      try {
+        const response = await axios.post('https://tracker-server-two.vercel.app/api/expense/fetchexpense', { currentUser });
+        const data = response.data;
+        setUserExpenses(data);
+        console.log(data);
+      } catch (error) {
+        console.error('Error fetching expenses:', error);
+      }
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const expenses = await fetchExpenses(token);
-      setExpenses(expenses);
-    };
-
-    fetchData();
-  }, [token]);
+    getUserInfo();
+    fetchExpenses();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -33,22 +53,42 @@ const ExpensesTracking = () => {
     const expense = {
       ...newExpense,
       amount: parseFloat(newExpense.amount),
+      userId: currentUser,
     };
-    const savedExpense = await addExpense(expense, token);
-    setExpenses([...expenses, savedExpense]);
+
     setNewExpense({ date: '', category: '', amount: '' });
+
+    try {
+      const response = await axios.post('https://tracker-server-two.vercel.app/api/expense', expense);
+      const data = response.data;
+      console.log(data);
+
+      fetchExpenses(); // Update expenses after adding
+
+      if (data.status === false) {
+        toast.error(`Insufficient funds`);
+      } else {
+        toast.success('Expense saved successfully');
+      }
+    } catch (error) {
+      console.error('Error adding expense:', error);
+    }
   };
 
   const handleDeleteExpense = async (id) => {
-    await deleteExpense(id, token);
-    setExpenses(expenses.filter(expense => expense._id !== id));
+    try {
+      await axios.delete(`https://tracker-server-two.vercel.app/api/expense/${id}`);
+      fetchExpenses(); // Update expenses after deleting
+    } catch (error) {
+      console.error('Error deleting expense:', error);
+    }
   };
 
   const getChartData = () => {
     const categories = ['Food', 'Transport', 'Entertainment'];
     const data = categories.map(
       (category) =>
-        expenses
+        userExpenses
           .filter((expense) => expense.category === category)
           .reduce((total, expense) => total + (expense.amount || 0), 0)
     );
@@ -67,6 +107,7 @@ const ExpensesTracking = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
+      <ToastContainer />
       <main className="flex-grow p-2 md:ml-60 mt-10">
         <div className="container mx-auto py-6 px-4 md:px-6">
           <div className="bg-white p-4 rounded-lg shadow-md mb-6">
@@ -111,7 +152,7 @@ const ExpensesTracking = () => {
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h2 className="text-lg font-bold mb-4">Past Expenses</h2>
+            <h2 className="text-lg font-bold mb-4">Expenses</h2>
             <div className="overflow-x-auto">
               <table className="min-w-full bg-white border border-gray-300">
                 <thead>
@@ -123,7 +164,7 @@ const ExpensesTracking = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {expenses.map((expense) => (
+                  {userExpenses.map((expense) => (
                     <tr key={expense._id}>
                       <td className="py-2 px-4 border-b">{expense.category}</td>
                       <td className="py-2 px-4 border-b">{expense.date}</td>
@@ -145,8 +186,8 @@ const ExpensesTracking = () => {
 
           <div className="bg-white p-5 rounded-lg shadow-md">
             <h2 className="text-lg font-bold mb-4">Spending by Category</h2>
-            <div className="flex flex-wrap justify-center space-y-4 md:space-y-0 md:space-x-4">
-              <div className="flex-1 max-w-xs">
+            <div className="flex justify-center">
+              <div className="max-w-xs">
                 <Pie data={getChartData()} />
                 <p className="text-center mt-4">Expenses by Category</p>
               </div>

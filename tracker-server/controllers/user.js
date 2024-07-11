@@ -1,5 +1,5 @@
 const registerSchema = require ('../models/User');
-
+const expense= require('../models/Expense')
 module.exports.register = async (req, res) => {
     console.log(req.body)
 
@@ -26,4 +26,16 @@ module.exports.register = async (req, res) => {
       console.error(err.message);
       res.status(500).json({ msg: 'Server error' });
     }
+}
+
+module.exports.getUserDetails=async(req, res)=>{
+  // res.send("ddd")
+  const userId= req.body.currentUser
+  
+  const user = await registerSchema.findOne({_id:userId})
+  console.log(user)
+  if(user){
+    res.send({user:user})
+  }
+
 }

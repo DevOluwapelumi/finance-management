@@ -12,7 +12,11 @@ const UserSchema = new mongoose.Schema({
         // required: [true, "LastName is required"]
     },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
+  password: { type: String, required: true },
+  balance:{type:Number, default:1000},
+  monthlySpd:{type:Number, default:0},
+  savingGoal:{type:Number, default:0},
+
 });
 
 UserSchema.pre('save', async function(next) {

@@ -1,4 +1,4 @@
-// models/Expense.js
+// models/budgetAndGoal.js
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
@@ -8,11 +8,11 @@ const expenseSchema = new Schema({
     type: String,
     required: true,
   },
-  date: {
-    type: String,
+  budgetAmount: {
+    type: Number,
     required: true,
   },
-  amount: {
+  savingGoal: {
     type: Number,
     required: true,
   },
@@ -23,4 +23,4 @@ const expenseSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('Expense', expenseSchema);
+module.exports = mongoose.model('budget', budgetSchema);
