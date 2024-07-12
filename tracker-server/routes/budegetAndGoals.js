@@ -1,42 +1,74 @@
-// routes/budgetAndGoals.js
 const express = require('express');
-const budget = require('../models/Expense'); // Adjust the path as necessary
+const Goal = require('../models/budgetAndGoals'); // Adjust the path as necessary
 const auth = require('../middleware/auth');
-const user = require('../models/User')
-
 const router = express.Router();
+const User = require('../models/User');
 
-// GET all expenses for the logged-in user
+// GET all Goals for the logged-in user
 router.get('/', auth, async (req, res) => {
   try {
-    const expenses = await Expense.find({ userId: req.user.id });
-    res.json(expenses);
+    const goals = await Goal.find({ userId: req.user.id });
+    res.json(goals);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-
-// POST route to save budget and goal
-router.post('/api/budgetAndGoals/save', async (req, res) => {
-  const { category, budgetAmount, savingGoal, userId } = req.body;
+// POST a new Goal
+router.post('/', async (req, res) => {
+  console.log("now in saving goals");
+  const { category, date, amountb, amounts, userId } = req.body;
 
   try {
-    // Create new BudgetGoal document
-    const budgetGoal = new BudgetGoal({
+    const currentUser = await User.findById(userId);
+    if (!currentUser) {
+      return res.status(404).json({ status: false, message: "User not found" });
+    }
+
+    const newGoal = new Goal({
       category,
-      budgetAmount,
-      savingGoal,
+      date,
+      amountb,
+      amounts,
       userId,
     });
 
-    // Save to database
-    await budgetGoal.save();
+    console.log("Received data:", req.body);
 
-    res.status(201).json({ message: 'Budget and goal saved successfully' });
-  } catch (error) {
-    console.error('Error saving budget and goal:', error);
-    res.status(500).json({ error: 'Failed to save budget and goal' });
+    currentUser.savingGoal += amounts; // Add the amounts to savingGoal
+    await currentUser.save();
+
+    const savedGoal = await newGoal.save();
+    res.json({ status: true, message: "Goal saved successfully", goal: savedGoal });
+
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+// Fetch user Goals
+router.post('/fetchgoal', async (req, res) => {
+  const { currentUser } = req.body;
+
+  try {
+    const userGoals = await Goal.find({ userId: currentUser });
+    res.json(userGoals);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// DELETE a Goal
+router.post('/delete', async (req, res) => {
+  try {
+    const goal = await Goal.findOneAndDelete({ _id: req.body.goalid });
+    if (goal) {
+      res.status(200).json({ message: 'Goal deleted' });
+    } else {
+      res.json({ message: 'Goal not found or already deleted' });
+    }
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
 

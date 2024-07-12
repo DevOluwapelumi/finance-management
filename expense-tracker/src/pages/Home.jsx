@@ -1,5 +1,5 @@
-// import React from 'react';
-import { Doughnut, Line, Bar } from 'react-chartjs-2';
+import { useEffect, useState } from 'react';
+import { Line, Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   ArcElement,
@@ -11,13 +11,11 @@ import {
   LinearScale,
   BarElement,
 } from 'chart.js';
+import axios from 'axios';
 import 'flowbite';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-// import Sidebar from '../components/Sidebar';
-// import Nav from '../components/Nav';
-import axios from 'axios';
-import { useEffect } from 'react';
+
 ChartJS.register(
   ArcElement,
   Tooltip,
@@ -30,38 +28,121 @@ ChartJS.register(
 );
 
 const Home = () => {
+  const currentUser = localStorage.userId;
+  const [userDetails, setUserDetails] = useState({});
+  const [userIncomes, setUserIncomes] = useState([]);
+  const [userExpenses, setUserExpenses] = useState([]);
 
-  const currentUser = localStorage.userId
-  const getUserInfo=async()=>{
-    const response = await axios.post('http://localhost:5000/api/users/userDetails', {currentUser:currentUser});
-    console.log(response.data)
-    // http://localhost:5173/home
-  }
-  useEffect(()=>{
-    getUserInfo()
-  },[])
+  const getUserInfo = async () => {
+    const response = await axios.post('http://localhost:5000/api/users/userDetails', { currentUser });
+    setUserDetails(response.data.user);
+  };
+
+  const getUserIncomes = async () => {
+    const response = await axios.get('http://localhost:5000/api/incomes', { params: { userId: currentUser } });
+    setUserIncomes(response.data.incomes);
+  };
+
+  const getUserExpenses = async () => {
+    const response = await axios.get('http://localhost:5000/api/expenses', { params: { userId: currentUser } });
+    setUserExpenses(response.data.expenses);
+  };
+
+  useEffect(() => {
+    getUserInfo();
+    getUserIncomes();
+    getUserExpenses();
+    getIncomeChartData();
+    getExpensesChartData();
+  }, []);
+
+  const getIncomeChartData = () => {
+    const categories = Array.from(new Set(userIncomes.map(income => income.category)));
+    const data = categories.map(
+      (category) =>
+        userIncomes
+          .filter((income) => income.category === category)
+          .reduce((total, income) => total + (income.amount || 0), 0)
+    );
+
+    return {
+      labels: categories,
+      datasets: [
+        {
+          data,
+          backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff', '#ff9f40'],
+          hoverBackgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff', '#ff9f40'],
+        },
+      ],
+    };
+  };
+
+  const getExpensesChartData = () => {
+    const categories = Array.from(new Set(userExpenses.map(expense => expense.category)));
+    const data = categories.map(
+      (category) =>
+        userExpenses
+          .filter((expense) => expense.category === category)
+          .reduce((total, expense) => total + (expense.amount || 0), 0)
+    );
+
+    return {
+      labels: categories,
+      datasets: [
+        {
+          data,
+          backgroundColor: ['#ff6384', '#36a2eb', '#ffce56'],
+          hoverBackgroundColor: ['#ff6384', '#36a2eb', '#ffce56'],
+        },
+      ],
+    };
+  };
+
+  const getMonthlySpendingTrendData = () => {
+    return {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      datasets: [
+        {
+          label: 'Spending',
+          data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40],
+          fill: false,
+          backgroundColor: 'rgba(75,192,192,0.4)',
+          borderColor: 'rgba(75,192,192,1)',
+        },
+      ],
+    };
+  };
+
+  const getIncomeVsExpensesVsGoalsData = () => {
+    return {
+      labels: ['Income', 'Expenses', 'Goals'],
+      datasets: [
+        {
+          label: 'Amount',
+          data: [userDetails.income || 0, userDetails.expenses || 0, userDetails.savingGoal || 0],
+          backgroundColor: ['#36A2EB', '#FF6384', '#ffce56'],
+        },
+      ],
+    };
+  };
+
   return (
     <>
       <Header />
-    {/* <Nav/> */}
-    <div className="flex flex-col mt-[35px] min-h-screen">
-
-      {/* <div className="flex flex-grow"> */}
-        {/* <Sidebar className="hidden md:block md:w-1/4 lg:w-1/5" /> */}
-
+      <div className="flex flex-col mt-[35px] min-h-screen">
         <main className="flex-grow p-2 md:ml-60">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
             <div className="bg-white p-4 rounded-lg shadow-md mt-5">
               <h2 className="text-lg font-bold">Account Balance</h2>
-              <p className="text-2xl">$0.00</p>
+              <p className="text-2xl">{userDetails.balance}</p>
             </div>
             <div className="bg-white p-4 rounded-lg shadow-md mt-5">
               <h2 className="text-lg font-bold">Monthly Spending</h2>
-              <p className="text-2xl">$0.00</p>
+              <p className="text-2xl">{userDetails.monthlySpd}</p>
             </div>
             <div className="bg-white p-4 rounded-lg shadow-md mt-5">
               <h2 className="text-lg font-bold">Saving Goals</h2>
-              <p className="text-2xl">$0.00</p>
+              <p className="text-2xl">{userDetails.savingGoal}</p>
             </div>
           </div>
           <div className="bg-white p-4 rounded-lg shadow-md mb-4">
@@ -83,57 +164,17 @@ const Home = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
             <div className="bg-white p-5 rounded-lg shadow-md">
-              <h2 className="text-lg font-bold mb-2">Spending Categories</h2>
-              <Doughnut
-                data={{
-                  labels: ['Category 1', 'Category 2', 'Category 3'],
-                  datasets: [
-                    {
-                      data: [300, 50, 100],
-                      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                      hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                    },
-                  ],
-                }}
-              />
-            </div>
-            <div className="bg-white p-5 rounded-lg shadow-md">
               <h2 className="text-lg font-bold mb-2">Monthly Spending Trend</h2>
-              <Line
-                data={{
-                  labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-                  datasets: [
-                    {
-                      label: 'Spending',
-                      data: [65, 59, 80, 81, 56, 55, 40],
-                      fill: false,
-                      backgroundColor: 'rgba(75,192,192,0.4)',
-                      borderColor: 'rgba(75,192,192,1)',
-                    },
-                  ],
-                }}
-              />
+              <Line data={getMonthlySpendingTrendData()} />
             </div>
             <div className="bg-white p-5 rounded-lg shadow-md">
-              <h2 className="text-lg font-bold mb-2">Income vs Expenses</h2>
-              <Bar
-                data={{
-                  labels: ['Income', 'Expenses'],
-                  datasets: [
-                    {
-                      label: 'Amount',
-                      data: [5000, 4000],
-                      backgroundColor: ['#36A2EB', '#FF6384'],
-                    },
-                  ],
-                }}
-              />
+              <h2 className="text-lg font-bold mb-2">Income vs Expenses vs Goals</h2>
+              <Bar data={getIncomeVsExpensesVsGoalsData()} />
             </div>
           </div>
           <Footer />
         </main>
       </div>
-    {/* </div> */}
     </>
   );
 };

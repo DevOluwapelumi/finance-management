@@ -10,6 +10,7 @@ import './App.css'
 import Register from './pages/Register';
 import Home from './pages/Home';
 import ExpensesTracking from './pages/ExpensesTracking';
+import IncomePage from './pages/IncomePage';
 import BudgetAndGoals from './pages/BudgetAndGoals';
 import Dashboard from './pages/Dashboard';
 import LandingPage from './pages/LandingPage';
@@ -38,6 +39,7 @@ const App = () => {
         <Route path='/register' element={<Register/>}/>
         <Route path='/home' element={<Home/>}/>
         <Route path='/expense' element={<ExpensesTracking/>}/>
+        <Route path='/income' element={<IncomePage/>}/>
         <Route path='/budget' element={<BudgetAndGoals/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
       </Routes>

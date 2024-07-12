@@ -6,7 +6,8 @@ const cors = require('cors');
 const userRoutes = require('./routes/user');
 require('dotenv').config(); 
 const userExpense = require('./routes/expense');
-const userBudget = require('./routes/expense');
+const userGoal = require('./routes/budegetAndGoals');
+const userIncome = require('./routes/income');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -19,7 +20,8 @@ app.use(cors());
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/expense', userExpense);
-app.use('/api/budgetAndGoals', userBudget);
+app.use('/api/income', userIncome);
+app.use('/api/budgetAndGoals', userGoal);
 
 
 

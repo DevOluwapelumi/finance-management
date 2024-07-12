@@ -1,16 +1,14 @@
 // import React from 'react';
-// import {  FaCog } from 'react-icons/fa';
-
-// import { Card } from 'flowbite-react';
 import { Button } from 'flowbite-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLightbulb, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import { faPiggyBank, faWallet, faDollarSign, faClipboard, faChartLine, faBullseye } from '@fortawesome/free-solid-svg-icons';
+import { faLightbulb} from '@fortawesome/free-solid-svg-icons';
+// import { faPiggyBank, faWallet, faDollarSign, faClipboard, faChartLine, faBullseye } from '@fortawesome/free-solid-svg-icons';
+import { faPiggyBank} from '@fortawesome/free-solid-svg-icons';
 import { faChartBar, faClipboardCheck, faCogs } from '@fortawesome/free-solid-svg-icons';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 // import Sidebar from '../components/Sidebar';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import image4 from '../assets/Image.png'; 
 
 
@@ -36,20 +34,16 @@ const Dashboard = () => {
     <div className="bg-gray-200 p-2 rounded-lg w-full shadow-md">
       <h2 className="text-lg font-bold mb-2">New update!</h2>
       <div>
-        <div className="flex items-start space-x-2">
+        <div className="flex items-start space-x-2 mt-3">
           <img src="src/assets/Image.png" alt="Insights" className="w-10 h-10 rounded-full"/>
           <div className="flex-1">
             <p className="font-semibold">Insights</p>
             <p className="text-sm text-gray-600">analyzed data for Expense Trends</p>
-            <div className="flex mt-1 space-x-1">
-              <Button className="mt-1 text-gray-600" size="xs">View</Button>
-              <Button className="mt-1 text-gray-600 ml-1" size="xs">Respond</Button>
-              <Button className="mt-1 text-gray-600 ml-1" size="xs">Save</Button>
-            </div>
           </div>
-          <p className="text-sm text-gray-600">Now</p>
+          <Button> <Link to="/home" className="mt-1 text-dark-900" size="xs">View </Link></Button>
         </div>
-        <div className="flex items-start space-x-2">
+
+        {/* <div className="flex items-start space-x-2">
           <img src="src/assets/Image.png" alt="Calculator" className="w-10 h-10 rounded-full"/>
           <div className="flex-1">
             <p className="font-semibold">Calculator</p>
@@ -61,19 +55,15 @@ const Dashboard = () => {
             </div>
           </div>
           <p className="text-sm text-gray-600">Today</p>
-        </div>
-        <div className="flex items-start space-x-2">
+        </div> */}
+
+        <div className="flex items-start space-x-2 mt-5">
           <img src="src/assets/Image.png" alt="Report" className="w-10 h-10 rounded-full"/>
           <div className="flex-1">
             <p className="font-semibold">Report</p>
             <p className="text-sm text-gray-600">Financial Report</p>
-            <div className="flex mt-1 space-x-1">
-              <Button className="mt-1 text-gray-600" size="xs">View</Button>
-              <Button className="mt-1 text-gray-600 ml-1" size="xs">Respond</Button>
-              <Button className="mt-1 text-gray-600 ml-1" size="xs">Save</Button>
-            </div>
           </div>
-          <p className="text-sm text-gray-600">Yesterday</p>
+          <Button> <Link to="/home" className="mt-1 text-dark-900" size="xs">View </Link></Button>
         </div>
       </div>
     </div>
@@ -87,37 +77,27 @@ const Dashboard = () => {
           <div className="flex items-center">
             <FontAwesomeIcon icon={faLightbulb} className="w-5 h-5 flex items-center justify-center text-2xl" />
             <div className="ml-1">
-              <p className="font-semibold">Savings Plan</p>
-              <p className="text-sm text-gray-600">progress towards target</p>
+              <p className="font-semibold">Total Expenses</p>
+              {/* <p className="text-sm text-gray-600">progress towards target</p> */}
             </div>
           </div>
-          <Button className="mt-1 text-dark-900" size="xs">View</Button>
+          <Button> <Link to="/home" className="mt-1 text-dark-900" size="xs">View </Link></Button>
         </div>
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
             <FontAwesomeIcon icon={faPiggyBank} className="w-5 h-5 flex items-center justify-center text-2xl" />
             <div className="ml-1">
-              <p className="font-semibold">Investment</p>
-              <p className="text-sm text-gray-600">new investments made</p>
+              <p className="font-semibold">Account Balance</p>
+              {/* <p className="text-sm text-gray-600">new investments made</p> */}
             </div>
           </div>
-          <Button className="mt-1 text-dark-900" size="xs">View</Button>
-        </div>
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center">
-            <FontAwesomeIcon icon={faPencilAlt} className="w-5 h-5 flex items-center justify-center text-2xl" />
-            <div className="ml-1">
-              <p className="font-semibold">Expense</p>
-              <p className="text-sm text-gray-600">Budget goals updated</p>
-            </div>
-          </div>
-          <Button className="mt-1 text-dark-900" size="xs">View</Button>
+          <Button> <Link to="/home" className="mt-1 text-dark-900" size="xs">View </Link></Button>
         </div>
       </div>
     </div>
   </div>
 
-  <div className="flex space-x-4 p-2">
+  {/* <div className="flex space-x-4 p-2">
     <div className="bg-gray-200 p-4 rounded-lg w-full shadow-md">
       <h2 className="text-lg font-bold mb-4">FinancePal overview</h2>
       <div className="flex flex-wrap">
@@ -180,9 +160,9 @@ const Dashboard = () => {
         </div>
       </div>
     </div>
-  </div>
+  </div> */}
 
-  <div className="flex space-x-4 p-2">
+  {/* <div className="flex space-x-4 p-2">
     <div className="bg-gray-200 p-4 rounded-lg w-full shadow-md">
       <h2 className="text-lg font-bold mb-4">Upcoming expenses</h2>
       <div className="space-y-4">
@@ -218,7 +198,9 @@ const Dashboard = () => {
         </div>
       </div>
     </div>
-  </div>
+  </div> */}
+
+
   </div>
 
   <div className="flex space-x-4 p-2 -mt-5">
@@ -273,15 +255,21 @@ const Dashboard = () => {
     </div>
   </div>
 
-  <div className="bg-gray-200 p-4 rounded-lg w-1/3 shadow-md">
-    <h2 className="text-lg font-bold mb-4">Help & Settings</h2>
-    <div className="space-y-2">
-      <Button className="w-full text-gray-900" size="sm">Subscription</Button>
-      <Button className="w-full text-gray-900" size="sm">Manage budget</Button>
-      <Button className="w-full text-gray-900" size="sm">Learning resources</Button>
-      <Button className="w-full text-gray-900" size="sm">Help Center</Button>
-    </div>
+  <div className="bg-gray-200 p-4 rounded-lg w-full sm:w-2/3 md:w-1/2 lg:w-1/3 shadow-md">
+  <h2 className="text-lg font-bold mb-4">Help & Settings</h2>
+  <div className="space-y-2">
+    <Button>
+      <Link to="/budget" className="w-full text-gray-900" size="sm">Manage budget</Link>
+    </Button>
+    <Button>
+      <Link to="" className="w-full text-gray-900" size="sm">Learning resources</Link>
+    </Button>
+    <Button>
+      <Link to="https://wa.me/+2347047142093" className="w-full text-gray-900" size="sm">Help Center</Link>
+    </Button>
   </div>
+</div>
+
 </div>
     </div>
     <Footer/>           

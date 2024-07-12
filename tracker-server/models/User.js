@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema({
     },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  balance:{type:Number, default:1000},
+  balance:{type:Number, default:0},
   monthlySpd:{type:Number, default:0},
   savingGoal:{type:Number, default:0},
 

@@ -87,13 +87,13 @@ const Nav = () => {
             <li>
               <Link to="/expense" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                 <FaChartPie />
-                <span className="flex-1 ms-3 whitespace-nowrap">Expense Tracking</span>
+                <span className="flex-1 ms-3 whitespace-nowrap">Expense</span>
               </Link>
             </li>
             <li>
-              <Link to="" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+              <Link to="/income" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                 <FaBullseye />
-                <span className="flex-1 ms-3 whitespace-nowrap">Transactions</span>
+                <span className="flex-1 ms-3 whitespace-nowrap">Income</span>
               </Link>
             </li>
             <li>

@@ -1,23 +1,23 @@
 const express = require('express');
-const Expense = require('../models/Expense'); // Adjust the path as necessary
+const Income = require('../models/Income'); // Adjust the path as necessary
 const auth = require('../middleware/auth');
 const user = require('../models/User')
 
 const router = express.Router();
 
-// GET all expenses for the logged-in user
+// GET all incomes for the logged-in user
 router.get('/', async (req, res) => {
   try {
-    const expenses = await Expense.find({ userId: req.user.id });
-    res.json(expenses);
+    const incomes = await Income.find({ userId: req.user.id });
+    res.json(incomes);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-// POST a new expense
+// POST a new income
 router.post('/', async (req, res) => {
-  console.log("now in saving expense");
+  console.log("now in saving income");
   const { category, date, amount, userId } = req.body;
   user.findOne({_id:userId}).then( async(currentUser)=>{
     console.log(amount, currentUser.balance)
@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
       res.send({status:false, message:"Insuffiecient Funds" })
       console.log("ddd")
     }else if(currentUser.balance>amount){
-      const newExpense = new Expense({
+      const newIncome = new Income({
         category,
         date,
         amount,
@@ -36,14 +36,14 @@ router.post('/', async (req, res) => {
       });
       console.log("Received data:", req.body);
       try {
-        currentUser.balance= currentUser.balance-amount
+        currentUser.balance= currentUser.balance+amount
         currentUser.save()
         console.log(currentUser)
-        const savedExpense = await newExpense.save();
-        if (savedExpense) {
-          res.send({ status: true, message: "Expense saved successfully" });
+        const savedIncome = await newIncome.save();
+        if (savedIncome) {
+          res.send({ status: true, message: "Income saved successfully" });
         } else {
-          res.send({ status: false, message: "Error: Unable to save expense" });
+          res.send({ status: false, message: "Error: Unable to save income" });
         }
       } catch (err) {
         res.status(400).json({ message: err.message });
@@ -55,29 +55,29 @@ router.post('/', async (req, res) => {
  
 });
 
-// Fetch user expenses
-router.post('/fetchexpense', async (req, res) => {
+// Fetch user incomes
+router.post('/fetchincome', async (req, res) => {
   const { currentUser } = req.body;
 
   try {
-    const getUserExpense = await Expense.find({ userId: currentUser });
+    const getUserIncome = await Income.find({ userId: currentUser });
     // console.log("Fetched user expenses:", getUserExpense);
-    res.json(getUserExpense);
+    res.json(getUserIncome);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-// DELETE an expense
+// DELETE an income
 router.post('/delete', async (req, res) => {
   try {
-    const expense = await Expense.findOneAndDelete({ _id: req.body.expenseid });
-    if (expense) {
-      return res.status(200).json({ message: 'Expense deleted' });
+    const income = await Income.findOneAndDelete({ _id: req.body.incomeid });
+    if (income) {
+      return res.status(200).json({ message: 'Income deleted' });
     }else{
-      res.json({ message: 'Expense not found or deleted' });
+      res.json({ message: 'Income not found or deleted' });
     }
-    // await expense.remove();
+    // await income.remove();
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
