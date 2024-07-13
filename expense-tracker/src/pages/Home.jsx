@@ -35,16 +35,19 @@ const Home = () => {
 
   const getUserInfo = async () => {
     const response = await axios.post('http://localhost:5000/api/users/userDetails', { currentUser });
+    // const response = await axios.post('https://tracker-server-two.vercel.app/api/users/userDetails', { currentUser });
     setUserDetails(response.data.user);
   };
 
   const getUserIncomes = async () => {
     const response = await axios.get('http://localhost:5000/api/incomes', { params: { userId: currentUser } });
+    // const response = await axios.get('https://tracker-server-two.vercel.app/api/incomes', { params: { userId: currentUser } });
     setUserIncomes(response.data.incomes);
   };
 
   const getUserExpenses = async () => {
     const response = await axios.get('http://localhost:5000/api/expenses', { params: { userId: currentUser } });
+    // const response = await axios.get('https://tracker-server-two.vercel.app/api/expenses', { params: { userId: currentUser } });
     setUserExpenses(response.data.expenses);
   };
 

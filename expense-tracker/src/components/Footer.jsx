@@ -14,7 +14,7 @@ const Footer = () => {
           <a href="#" className="hover:text-gray-300 me-4 md:me-6">Terms of Service</a>
           </li>
           <li>
-          <a href="#" className="hover:text-gray-300 me-4 md:me-6">Contact Us</a>
+          <a href="Ayomideshaun98@gmail.com" className="hover:text-gray-300 me-4 md:me-6">Contact Us</a>
           </li>
           </ul>
         </div>
