@@ -13,8 +13,8 @@ const IncomePage = () => {
 
   const getUserInfo = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/users/userDetails', { currentUser });
-      // const response = await axios.post('https://tracker-server-two.vercel.app/api/users/userDetails', { currentUser });
+      // const response = await axios.post('http://localhost:5000/api/users/userDetails', { currentUser });
+      const response = await axios.post('https://tracker-server-two.vercel.app/api/users/userDetails', { currentUser });
       console.log(response.data);
     } catch (error) {
       console.error('Error fetching user info:', error);
@@ -24,8 +24,8 @@ const IncomePage = () => {
   const fetchIncomes = async () => {
     if (currentUser) {
       try {
-        const response = await axios.post('http://localhost:5000/api/income/fetchincome', { currentUser });
-        // const response = await axios.post('https://tracker-server-two.vercel.app/api/income/fetchincome', { currentUser });
+        // const response = await axios.post('http://localhost:5000/api/income/fetchincome', { currentUser });
+        const response = await axios.post('https://tracker-server-two.vercel.app/api/income/fetchincome', { currentUser });
         const data = response.data;
         setUserIncomes(data);
         console.log(data);
@@ -60,8 +60,8 @@ const IncomePage = () => {
     setNewIncome({ date: '', category: '', amount: '' });
 
     try {
-      const response = await axios.post('http://localhost:5000/api/income', income);
-      // const response = await axios.post('https://tracker-server-two.vercel.app/api/income', income);
+      // const response = await axios.post('http://localhost:5000/api/income', income);
+      const response = await axios.post('https://tracker-server-two.vercel.app/api/income', income);
       const data = response.data;
       console.log(data);
 
@@ -79,8 +79,8 @@ const IncomePage = () => {
 
   const handleDeleteIncome = async (id) => {
     try {
-      await axios.post(`http://localhost:5000/api/income/delete`, { incomeid: id });
-      // await axios.post(`https://tracker-server-two.vercel.app/api/income/delete`, { incomeid: id });
+      // await axios.post(`http://localhost:5000/api/income/delete`, { incomeid: id });
+      await axios.post(`https://tracker-server-two.vercel.app/api/income/delete`, { incomeid: id });
       toast.error(`Income deleted`);
       fetchIncomes(); // Update incomes after deleting
     } catch (error) {
@@ -135,9 +135,6 @@ const IncomePage = () => {
                 className="border border-gray-300 rounded p-2 flex-1 min-w-full md:min-w-0"
               >
                 <option value="">Select Category</option>
-                <option value="Food">Food</option>
-                <option value="Transport">Transport</option>
-                <option value="Entertainment">Entertainment</option>
                 <option value="Salary">Salary</option>
                 <option value="Savings">Savings</option>
               </select>

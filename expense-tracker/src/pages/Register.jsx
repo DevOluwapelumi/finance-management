@@ -29,8 +29,8 @@ const Register = () => {
         },
         validationSchema,
         onSubmit: (values) => {
-            // axios.post("https://tracker-server-two.vercel.app/api/users/register", values)
-            axios.post("http://localhost:5000/api/users/register", values)
+            axios.post("https://tracker-server-two.vercel.app/api/users/register", values)
+            // axios.post("http://localhost:5000/api/users/register", values)
                 .then((response) => {
                     console.log(response);
                     if (response.data.msg === 'User registered successfully') {

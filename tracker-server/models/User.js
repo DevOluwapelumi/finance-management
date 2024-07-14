@@ -15,6 +15,9 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   balance:{type:Number, default:0},
   monthlySpd:{type:Number, default:0},
+// monthlySpd: { type: [Number], default: Array(12).fill(0) },
+// monthlySpd: { type: Number, default: () => Array(12).fill(0) },
+
   savingGoal:{type:Number, default:0},
 
 });

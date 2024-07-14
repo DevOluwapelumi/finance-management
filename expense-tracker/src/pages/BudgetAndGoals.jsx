@@ -12,8 +12,8 @@ const BudgetAndGoals = () => {
 
   const getUserInfo = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/users/userDetails', { currentUser });
-      // const response = await axios.post('https://tracker-server-two.vercel.app/api/users/userDetails', { currentUser });
+      // const response = await axios.post('http://localhost:5000/api/users/userDetails', { currentUser });
+      const response = await axios.post('https://tracker-server-two.vercel.app/api/users/userDetails', { currentUser });
       console.log(response.data);
     } catch (error) {
       console.error('Error fetching user info:', error);
@@ -24,8 +24,8 @@ const BudgetAndGoals = () => {
   const fetchGoals = async () => {
     if (currentUser) {
       try {
-        const response = await axios.post('http://localhost:5000/api/budgetAndGoals/fetchgoal', { currentUser });
-        // const response = await axios.post('https://tracker-server-two.vercel.app/api/budgetAndGoals/fetchgoal', { currentUser });
+        // const response = await axios.post('http://localhost:5000/api/budgetAndGoals/fetchgoal', { currentUser });
+        const response = await axios.post('https://tracker-server-two.vercel.app/api/budgetAndGoals/fetchgoal', { currentUser });
         const data = response.data;
         setUserGoals(data);
         console.log(data);
@@ -70,8 +70,8 @@ const BudgetAndGoals = () => {
     setNewGoal({ date: '', category: '', amountb: '', amounts: '' });
 
     try {
-      const response = await axios.post('http://localhost:5000/api/budgetAndGoals', goal);
-      // const response = await axios.post('https://tracker-server-two.vercel.app/api/budgetAndGoals', goal);
+      // const response = await axios.post('http://localhost:5000/api/budgetAndGoals', goal);
+      const response = await axios.post('https://tracker-server-two.vercel.app/api/budgetAndGoals', goal);
       const data = response.data;
       console.log(data);
 
@@ -89,8 +89,8 @@ const BudgetAndGoals = () => {
 
   const handleDeleteGoal = async (id) => {
     try {
-      await axios.post('http://localhost:5000/api/budgetAndGoals/delete', { goalid: id });
-      // await axios.post('https://tracker-server-two.vercel.app/api/budgetAndGoals/delete', { goalid: id });
+      // await axios.post('http://localhost:5000/api/budgetAndGoals/delete', { goalid: id });
+      await axios.post('https://tracker-server-two.vercel.app/api/budgetAndGoals/delete', { goalid: id });
       toast.success('Goal deleted');
       fetchGoals(); // Update Goals after deleting
     } catch (error) {
@@ -114,17 +114,30 @@ const BudgetAndGoals = () => {
                 onChange={handleInputChange}
                 className="border border-gray-300 rounded p-2 flex-1 min-w-full md:min-w-0"
               />
-              <select
-                name="category"
-                onChange={handleInputChange}
-                value={newGoal.category}
-                className="border border-gray-300 rounded p-2 flex-1 min-w-full md:min-w-0"
-              >
-                <option value="">Select Category</option>
-                <option value="Food">Food</option>
-                <option value="Transport">Transport</option>
-                <option value="Entertainment">Entertainment</option>
-              </select>
+                        <select
+              name="category"
+              onChange={handleInputChange}
+              value={newGoal.category}
+              className="border border-gray-300 rounded p-2 flex-1 min-w-full md:min-w-0"
+            >
+              <option value="">Select Category</option>
+              <option value="Food">Food</option>
+              <option value="Transport">Transport</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Housing">Housing</option>
+              <option value="Utilities">Utilities</option>
+              <option value="Insurance">Insurance</option>
+              <option value="Healthcare">Healthcare</option>
+              <option value="Debt Repayment">Debt Repayment</option>
+              <option value="Education">Education</option>
+              <option value="Personal Care">Personal Care</option>
+              <option value="Miscellaneous">Miscellaneous</option>
+              <option value="Travel">Travel</option>
+              <option value="Fitness">Fitness</option>
+              <option value="Investments">Investments</option>
+              <option value="Charity">Charity</option>
+            </select>
+
               <input
                 type="number"
                 name="amountb"

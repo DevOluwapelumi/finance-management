@@ -55,9 +55,13 @@ const Home = () => {
     getUserInfo();
     getUserIncomes();
     getUserExpenses();
+  }, []);
+
+  useEffect(() => {
     getIncomeChartData();
     getExpensesChartData();
-  }, []);
+    getMonthlySpendingTrendData();
+  }, [userIncomes, userExpenses, userDetails]);
 
   const getIncomeChartData = () => {
     const categories = Array.from(new Set(userIncomes.map(income => income.category)));
@@ -102,12 +106,23 @@ const Home = () => {
   };
 
   const getMonthlySpendingTrendData = () => {
+    const monthlySpd = Array(12).fill(0);
+    userExpenses.forEach(expense => {
+      const month = new Date(expense.date).getMonth();
+      monthlySpd[month] += expense.amount;
+    });
+
+    if (userDetails.monthlySpd) {
+      const currentMonth = new Date().getMonth();
+      monthlySpd[currentMonth] += userDetails.monthlySpd;
+    }
+
     return {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
       datasets: [
         {
           label: 'Spending',
-          data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40],
+          data: monthlySpd,
           fill: false,
           backgroundColor: 'rgba(75,192,192,0.4)',
           borderColor: 'rgba(75,192,192,1)',
@@ -122,12 +137,13 @@ const Home = () => {
       datasets: [
         {
           label: 'Amount',
-          data: [userDetails.income || 0, userDetails.expenses || 0, userDetails.savingGoal || 0],
+          data: [userDetails.balance || 0, userDetails.monthlySpd || 0, userDetails.savingGoal || 0],
           backgroundColor: ['#36A2EB', '#FF6384', '#ffce56'],
         },
       ],
     };
   };
+
 
   return (
     <>

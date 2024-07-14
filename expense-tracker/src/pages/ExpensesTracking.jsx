@@ -128,17 +128,27 @@ const ExpensesTracking = () => {
                 onChange={handleInputChange}
                 className="border border-gray-300 rounded p-2 flex-1 min-w-full md:min-w-0"
               />
-              <select
-                name="category"
-                value={newExpense.category}
-                onChange={handleInputChange}
-                className="border border-gray-300 rounded p-2 flex-1 min-w-full md:min-w-0"
-              >
-                <option value="">Select Category</option>
-                <option value="Food">Food</option>
-                <option value="Transport">Transport</option>
-                <option value="Entertainment">Entertainment</option>
-              </select>
+             
+                        <select
+              name="category"
+              value={newExpense.category}
+              onChange={handleInputChange}
+              className="border border-gray-300 rounded p-2 flex-1 min-w-full md:min-w-0"
+            >
+              <option value="">Select Category</option>
+              <option value="Food">Food</option>
+              <option value="Transport">Transport</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Housing">Housing</option>
+              <option value="Utilities">Utilities</option>
+              <option value="Insurance">Insurance</option>
+              <option value="Healthcare">Healthcare</option>
+              <option value="Debt Repayment">Debt Repayment</option>
+              <option value="Education">Education</option>
+              <option value="Personal Care">Personal Care</option>
+              <option value="Miscellaneous">Miscellaneous</option>
+            </select>
+
               <input
                 type="number"
                 name="amount"
