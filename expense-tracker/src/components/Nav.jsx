@@ -102,6 +102,12 @@ const Nav = () => {
                 <span className="flex-1 ms-3 whitespace-nowrap">Budget&Goals</span>
               </Link>
             </li>
+            <li>
+              <Link to="/transaction" className="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
+                <FaMoneyBill />
+                <span className="ms-3">Transactions</span>
+              </Link>
+            </li>
           </ul>
           <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
             <div className="text-gray-900 uppercase text-sm">Teams</div>
@@ -121,12 +127,6 @@ const Nav = () => {
               <Link to="" className="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
                 <FaShieldAlt />
                 <span className="ms-3">Privacy</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="" className="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
-                <FaMoneyBill />
-                <span className="ms-3">Transactions</span>
               </Link>
             </li>
           </ul>

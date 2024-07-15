@@ -13,8 +13,8 @@ const ExpensesTracking = () => {
 
   const getUserInfo = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/users/userDetails', { currentUser });
-      // const response = await axios.post('https://tracker-server-two.vercel.app/api/users/userDetails', { currentUser });
+      // const response = await axios.post('http://localhost:5000/api/users/userDetails', { currentUser });
+      const response = await axios.post('https://tracker-server-two.vercel.app/api/users/userDetails', { currentUser });
       console.log(response.data);
     } catch (error) {
       console.error('Error fetching user info:', error);
@@ -25,8 +25,8 @@ const ExpensesTracking = () => {
   const fetchExpenses = async () => {
     if (currentUser) {
       try {
-        const response = await axios.post('http://localhost:5000/api/expense/fetchexpense', { currentUser });
-        // const response = await axios.post('https://tracker-server-two.vercel.app/api/expense/fetchexpense', { currentUser });
+        // const response = await axios.post('http://localhost:5000/api/expense/fetchexpense', { currentUser });
+        const response = await axios.post('https://tracker-server-two.vercel.app/api/expense/fetchexpense', { currentUser });
         const data = response.data;
         setUserExpenses(data);
         console.log(data);
@@ -61,8 +61,8 @@ const ExpensesTracking = () => {
     setNewExpense({ date: '', category: '', amount: '' });
 
     try {
-      const response = await axios.post('http://localhost:5000/api/expense', expense);
-      // const response = await axios.post('https://tracker-server-two.vercel.app/api/expense', expense);
+      // const response = await axios.post('http://localhost:5000/api/expense', expense);
+      const response = await axios.post('https://tracker-server-two.vercel.app/api/expense', expense);
       const data = response.data;
       console.log(data);
 
@@ -80,8 +80,8 @@ const ExpensesTracking = () => {
 
   const handleDeleteExpense = async (id) => {
     try {
-      await axios.post(`http://localhost:5000/api/expense/delete`, {expenseid:id});
-      // await axios.post(`https://tracker-server-two.vercel.app/api/expense/delete`, {expenseid:id});
+      // await axios.post(`http://localhost:5000/api/expense/delete`, {expenseid:id});
+      await axios.post(`https://tracker-server-two.vercel.app/api/expense/delete`, {expenseid:id});
       toast.error(`Expense deleted`);
       fetchExpenses(); // Update expenses after deleting
     } catch (error) {
@@ -218,8 +218,9 @@ const ExpensesTracking = () => {
             </div>
           </div>
         </div>
-        <Footer />
+        
       </main>
+      <Footer className="mt-auto" />  
     </div>
   );
 };

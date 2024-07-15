@@ -14,7 +14,7 @@ import IncomePage from './pages/IncomePage';
 import BudgetAndGoals from './pages/BudgetAndGoals';
 import Dashboard from './pages/Dashboard';
 import LandingPage from './pages/LandingPage';
-// import TransactionPage from './pages/TransactionPage';
+import TransactionPage from './pages/TransactionPage';
 
 const App = () => {
   return (
@@ -43,7 +43,7 @@ const App = () => {
         <Route path='/income' element={<IncomePage/>}/>
         <Route path='/budget' element={<BudgetAndGoals/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
-        {/* <Route path='/transaction' element={<TransactionPage/>}/> */}
+        <Route path='/transaction' element={<TransactionPage/>}/>
       </Routes>
     </div>
   );

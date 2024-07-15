@@ -110,6 +110,7 @@ const IncomePage = () => {
   };
 
   return (
+    <>
     <div className="flex flex-col min-h-screen">
       <Header />
       <ToastContainer />
@@ -208,9 +209,11 @@ const IncomePage = () => {
             </div>
           </div>
         </div>
-        <Footer />
+       
       </main>
+      <Footer className="mt-auto" />  
     </div>
+    </>
   );
 };
 

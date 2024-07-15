@@ -39,7 +39,7 @@ const Dashboard = () => {
                       <p className="text-sm text-gray-600">Financial Report</p>
                     </div>
                     <Button className="bg-red-900 hover:bg-red-600 text-white rounded-full">
-                      <Link to="/home" className="text-white text-sm">View</Link>
+                      <Link to="/transaction" className="text-white text-sm">View</Link>
                     </Button>
                   </div>
                 </div>
